@@ -6,6 +6,25 @@
   </head>
   <body>
     <drumkit-app></drumkit-app>
+
+    <script type="module" src="./lib/drumkit-button.js"></script>
+    <template id="drumkit-button">
+      <style>
+        kbd {
+          text-transform: uppercase;
+        }
+
+        p { background-color: red }
+      </style>
+      <button>
+        <kbd><slot name="text"></slot></kbd>
+      </button>
+    </template>
+
     <script type="module" src="./lib/index.js"></script>
+    <template id="drumkit-app">
+      <div class="button-container"></div>
+    </template>
   </body>
 </html>
+
