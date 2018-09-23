@@ -5,14 +5,26 @@ class Drumkit extends HTMLElement {
   constructor() {
     super();
 
-    this.buttons = [ 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l' ];
+    this.buttons = [
+      { audio: '/sounds/boom.wav', name: 'boom', key: 'a' },
+      { audio: '/sounds/clap.wav', name: 'clap', key: 's' },
+      { audio: '/sounds/hihat.wav', name: 'hihat', key: 'd' },
+      { audio: '/sounds/kick.wav', name: 'kick', key: 'f' },
+      { audio: '/sounds/openhat.wav', name: 'openhat', key: 'g' },
+      { audio: '/sounds/ride.wav', name: 'ride', key: 'h' },
+      { audio: '/sounds/snare.wav', name: 'snare', key: 'j' },
+      { audio: '/sounds/tink.wav', name: 'tink', key: 'k' },
+      { audio: '/sounds/tom.wav', name: 'tom', key: 'l' },
+    ];
 
     this.attachShadow({ mode: 'open' })
     this.render();
 
     window.addEventListener('keypress', ({ key }) => {
-      if (this.buttons.includes(key)) {
-        this.clickButton(this.buttons.indexOf(key));
+      const eKey = e => e.key;
+
+      if (this.buttons.map(eKey).includes(key)) {
+        this.clickButton(this.buttons.map(eKey).indexOf(key));
       }
     });
   }
@@ -20,13 +32,13 @@ class Drumkit extends HTMLElement {
   clickButton(index) {
     const button = this.shadowRoot.querySelector(`drumkit-button:nth-of-type(${index+1})`);
 
-    return button.click();
+    return button.play();
   }
 
   get renderButton() {
     return button => html`
-      <drumkit-button>
-        <span slot="text">${button}</span>
+      <drumkit-button .audioUrl=${button.audio} .name=${button.name}>
+        <span slot="text">${button.key}</span>
       </drumkit-button>
     `;
   }

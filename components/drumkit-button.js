@@ -7,8 +7,17 @@ export default class DrumkitButton extends HTMLElement {
     this.attachShadow({ mode: 'open' });
 
     this.button = document.createElement('button');
-    this.button.addEventListener('click', this.click.bind(this));
-    render(html`<kbd><slot name="text"></slot></kbd>`, this.button);
+    this.button.addEventListener('click', this.play.bind(this));
+    render(html`
+        <kbd><slot name="text"></slot></kbd>
+        <p>${this.name}</p>
+      `,
+      this.button
+    );
+
+    this.audio = document.createElement('audio');
+    this.audio.hidden = true;
+    this.audio.src = this.audioUrl;
 
     this.render();
   }
@@ -50,13 +59,20 @@ export default class DrumkitButton extends HTMLElement {
       </style>
 
       ${this.button}
+      ${this.audio}
     `;
   }
 
-  click() {
+  play() {
     this.button.classList.add('playing');
+    this.audio.currentTime = 0;
+    this.audio.play();
 
-    setTimeout(() => this.button.classList.remove('playing'), 100);
+    this.button.addEventListener('transitionend', ({ propertyName }) => {
+      if (propertyName === 'transform') {
+        this.button.classList.remove('playing');
+      }
+    });
   }
 
   render() {
