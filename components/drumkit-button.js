@@ -22,10 +22,6 @@ export default class DrumkitButton extends HTMLElement {
     this.render();
   }
 
-  get template() {
-    return;
-  }
-
   play() {
     this.button.classList.add('playing');
     this.audio.currentTime = 0;
