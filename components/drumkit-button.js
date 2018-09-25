@@ -42,17 +42,9 @@ export default class DrumkitButton extends HTMLElement {
     const template = html`
       <style>
         button {
-          border: .4rem solid black;
-          border-radius: .5rem;
-          margin: 1rem;
-          font-size: 1.5rem;
-          padding: 1rem .5rem;
+          border: .1rem solid black;
           transition: all .07s ease;
-          width: 10rem;
-          text-align: center;
-          color: white;
-          background: rgba(0,0,0,0.4);
-          text-shadow: 0 0 .5rem black;
+          width: 5rem;
         }
 
         .playing {
@@ -63,11 +55,10 @@ export default class DrumkitButton extends HTMLElement {
 
         kbd {
           display: block;
-          font-size: 4rem;
+          font-size: 2rem;
         }
 
         .sound {
-          font-size: 1.2rem;
           text-transform: uppercase;
           letter-spacing: .1rem;
           color: #ffc600;
