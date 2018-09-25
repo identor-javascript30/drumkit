@@ -43,8 +43,8 @@ class Drumkit extends HTMLElement {
     `;
   }
 
-  get template() {
-    return html`
+  render() {
+    const template = html`
       <style>
         :host {
           display: flex;
@@ -58,17 +58,11 @@ class Drumkit extends HTMLElement {
 
       ${this.buttons.map(this.renderButton)}
     `;
-  }
 
-  render() {
-    return render(this.template, this.shadowRoot);
-  }
-
-  static get is() {
-    return 'drumkit-app';
+    return render(template, this.shadowRoot);
   }
 }
 
-customElements.define(Drumkit.is, Drumkit);
-customElements.define(DrumkitButton.is, DrumkitButton);
+customElements.define('drumkit-app', Drumkit);
+customElements.define('drumkit-button', DrumkitButton);
 

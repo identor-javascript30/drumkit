@@ -23,7 +23,23 @@ export default class DrumkitButton extends HTMLElement {
   }
 
   get template() {
-    return html`
+    return;
+  }
+
+  play() {
+    this.button.classList.add('playing');
+    this.audio.currentTime = 0;
+    this.audio.play();
+
+    this.button.addEventListener('transitionend', ({ propertyName }) => {
+      if (propertyName === 'transform') {
+        this.button.classList.remove('playing');
+      }
+    });
+  }
+
+  render() {
+    const template = html`
       <style>
         button {
           border: .4rem solid black;
@@ -61,26 +77,8 @@ export default class DrumkitButton extends HTMLElement {
       ${this.button}
       ${this.audio}
     `;
-  }
 
-  play() {
-    this.button.classList.add('playing');
-    this.audio.currentTime = 0;
-    this.audio.play();
-
-    this.button.addEventListener('transitionend', ({ propertyName }) => {
-      if (propertyName === 'transform') {
-        this.button.classList.remove('playing');
-      }
-    });
-  }
-
-  render() {
-    return render(this.template, this.shadowRoot);
-  }
-
-  static get is() {
-    return 'drumkit-button';
+    return render(template, this.shadowRoot);
   }
 }
 
