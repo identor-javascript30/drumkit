@@ -1,5 +1,5 @@
 import DrumkitButton from './components/drumkit-button.js';
-import {html, render} from 'https://unpkg.com/lit-html@0.11.4/lit-html.js';
+import {html, render} from 'https://unpkg.com/lit-html';
 
 class Drumkit extends HTMLElement {
   constructor() {

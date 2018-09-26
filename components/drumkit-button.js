@@ -1,4 +1,4 @@
-import {html, render} from 'https://unpkg.com/lit-html@0.11.4/lit-html.js';
+import {html, render} from 'https://unpkg.com/lit-html';
 
 export default class DrumkitButton extends HTMLElement {
   constructor() {
